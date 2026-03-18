@@ -1,0 +1,87 @@
+=== DIRECTORY STRUCTURE ===
+.:
+data
+experiments
+lab01_check.txt
+reports
+results
+src
+
+./data:
+processed
+raw
+
+./data/processed:
+high_temp.csv
+observations_clean.csv
+selected_columns.csv
+
+./data/raw:
+observations.csv
+
+./experiments:
+
+./reports:
+lab01_report.txt
+
+./results:
+
+./src:
+features
+inference
+ingestion
+models
+monitoring
+preprocessing
+
+./src/features:
+
+./src/inference:
+
+./src/ingestion:
+load_data_P3.py
+load_data.py
+
+./src/models:
+
+./src/monitoring:
+
+./src/preprocessing:
+
+=== DATASET FILES ===
+observations.csv
+high_temp.csv
+observations_clean.csv
+selected_columns.csv
+
+=== TOTAL RECORDS ===
+5
+
+=== OBJECT COUNTS ===
+      2 OBJ-001
+      1 OBJ-002
+      1 OBJ-003
+      1 OBJ-004
+
+=== INVALID RECORDS ===
+1
+
+=== FILE PERMISSIONS ===
+total 24
+drwxrwxr-x 4 student student 4096 mar 18 17:01 data
+drwxrwxr-x 2 student student 4096 mar 18 17:02 experiments
+-rw-rw-r-- 1 student student  741 mar 18 18:25 lab01_check.txt
+drwxrwxr-x 2 student student 4096 mar 18 17:54 reports
+drwxrwxr-x 2 student student 4096 mar 18 17:02 results
+drwxrwxr-x 8 student student 4096 mar 18 17:01 src
+
+=== SUMMARY OF TASKS ===
+- Created OOAIS project structure
+- Generated raw observation dataset
+- Inspected and analyzed dataset
+- Filtered invalid records and created cleaned dataset
+- Implemented basic ingestion script with average temperature and object counts
+- Simulated data flow and created lab report
+
+=== REPOSITORY LINK ===
+https://github.com/ALBALOZANOG/Artificial-Intelligence-and-Data-Engineering-for-Orbital-Systems
