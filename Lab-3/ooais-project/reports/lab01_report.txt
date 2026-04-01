@@ -1,0 +1,27 @@
+OOAIS Laboratory 1 Report
+
+Dataset Structure:
+timestamp,object_id,temperature,velocity
+The dataset is a CSV file with four columns: timestamp, object_id, temperature, and velocity. Each row represents a single observation of a space object.
+
+Observed Objects:
+The dataset contains: OBJ-001, OBJ-002, OBJ-003, and OBJ-004.
+Uniq count:
+	2 OBJ-001
+      1 OBJ-002
+      1 OBJ-003
+      1 OBJ-004
+
+
+Data Issues:
+One record contains an invalid temperature value ("INVALID").
+
+Cleaning Steps:
+Invalid records were identified using filtering (grep). Rows containing "INVALID" were removed to create a clean dataset.
+
+Data Flow:
+Raw data is stored in data/raw. It is copied to a temporary file, cleaned by removing invalid entries, and saved as the final dataset in data/processed.
+
+Role of Ingestion Layer:
+The ingestion layer loads raw data, performs basic validation, and prepares it for further processing.
+

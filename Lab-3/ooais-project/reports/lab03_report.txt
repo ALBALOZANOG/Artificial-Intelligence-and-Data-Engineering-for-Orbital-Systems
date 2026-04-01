@@ -1,0 +1,118 @@
+--- TASK 1
+metadata.json: 415 bytes, -rw-r--r-- (read/write for the owner, read-only for group and others)
+orbital_observations.csv: 28739 bytes, -rw-r--r-- (read/write for the owner, read-only for group and others)
+
+--- TASK 2
+Dataset name: orbital_observations
+Number of records: 100
+List of columns: timestamp, object_id, temperature, velocity, altitude, signal_strength, sensor_status, anomaly_flag
+Feature columns: temperature, velocity, altitude, signal_strength
+Target column: anomaly_flag
+Number of invalid records: 3
+
+--- TASK 3
+Is valid
+
+--- TASK 4
+.py created, output:
+Dataset: orbital_observations
+Records loaded: 500
+Columns (dataset): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Columns (metadata): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+
+--- TASK 5
+.py modified, output:
+Dataset: orbital_observations
+Records loaded: 500
+Columns (dataset): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Columns (metadata): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Column validation: OK
+
+-- Questions
+- What types of changes could cause a mismatch?
+Missing, extra, renamed columns or different column order
+
+- Is column order always important?
+Not always
+Important for ML models and pipelines expecting fixed input format
+Less important for general data analysis
+
+- Should the pipeline stop if validation fails?
+Yes, to prevents errors and unreliable results
+
+--- TASK 6
+.py modified, output:
+Dataset: orbital_observations
+Records loaded: 500
+Columns (dataset): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Columns (metadata): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Column validation: OK
+Record count: MISMATCH
+Expected: 100
+Actual: 500
+
+Metadata corrected, output:
+Dataset: orbital_observations
+Records loaded: 500
+Columns (dataset): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Columns (metadata): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Column validation: OK
+Record count: OK
+
+--- TASK 7
+.py modified, metadata corrected (3->30 invalid records), output:
+Dataset: orbital_observations
+Records loaded: 500
+Columns (dataset): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Columns (metadata): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Column validation: OK
+Record count: OK
+Valid records: 470
+Invalid records: 30
+Expected invalid records (metadata): 30
+Invalid record count matches metadata
+
+--- TASK 8
+.py modified, csvs created	
+
+--- TASK 9
+.py modified, input csv created.
+
+-- Questions
+- Why should the target column not be included in model input?
+Including it would leak the answer to the model, causing biased training.
+- What could happen if irrelevant columns were included?
+Noise could reduce model performance, slow training, and create overfitting.
+- Should feature selection always be performed in the ingestion layer, or later in the pipeline?
+Preferably in the ingestion layer for consistency.
+
+--- TASK 10
+
+--- P2
+- Why ingestion must precede preprocessing:
+Ingestion ensures the data is loaded, structured, and validated. Preprocessing relies on having clean, complete data; without ingestion, preprocessing may fail or produce incorrect results.
+- What happens if invalid data is not removed:
+Invalid records can cause errors, incorrect calculations, or model misbehavior, and may lead to biased or corrupted model outputs.
+- How ingestion affects model quality:
+Proper ingestion ensures only reliable, correctly formatted data reaches the model. This improves accuracy, consistency, and robustness of machine learning models.
+
+--- P3
+script modified, output:
+Dataset: orbital_observations
+Records loaded: 500
+Columns (dataset): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Columns (metadata): ['timestamp', 'object_id', 'temperature', 'velocity', 'altitude', 'signal_strength', 'sensor_status', 'anomaly_flag']
+Column validation: OK
+Record count validation: OK
+Valid records: 470
+Invalid records: 30
+Expected invalid records (metadata): 30
+Invalid record count matches metadata
+Valid records saved to: data/processed/observations_valid.csv
+Invalid records saved to: data/processed/observations_invalid.csv
+Model input saved to: data/processed/model_input.csv
+Records in model input: 470
+Columns in model input: ['temperature', 'velocity', 'altitude', 'signal_strength']
+Feature validation: OK
+Target validation: OK
+Ingestion summary saved to: reports/ingestion_summary.txt
