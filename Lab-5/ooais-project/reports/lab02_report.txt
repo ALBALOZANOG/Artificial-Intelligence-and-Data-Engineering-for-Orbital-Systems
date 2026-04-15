@@ -1,0 +1,162 @@
+Repository link: https://github.com/ALBALOZANOG/Artificial-Intelligence-and-Data-Engineering-for-Orbital-Systems
+
+TASK 1: Inspecting Dataset Structure
+
+identify column names:
+timestamp, object_id, temperature, velocity, altitude, signal_strength, sensor_status, anomaly_flag
+
+determine how many columns are present:
+8
+
+inspect several example records from the beginning and the end of the file:
+done
+
+
+TASK 2: Counting Records
+
+total number of lines in the dataset:
+501
+
+number of data records (excluding header):
+500
+
+
+TASK 3: Identifying Feature Candidates
+
+object identifier column:
+object_id, columns 2
+
+example values:
+OBJ-005, OBJ-001, OBJ-004, OBJ-002
+
+numerical columns analyzed:
+temperature (16.7), velocity (7.95)
+
+input columns:
+temperature, velocity, altitude, signal_strength, sensor_status
+
+target variable:
+anomaly_flag
+
+
+TASK 4: Exploring Object Distribution
+
+number of unique object identifiers:
+5
+
+observations per object:
+OBJ-001 : 90  
+OBJ-002 : 97  
+OBJ-003 : 100  
+OBJ-004 : 113  
+OBJ-005 : 100  
+
+most frequent objects:
+OBJ-004 (113), OBJ-005 (100), OBJ-003 (100)
+
+least frequent objects:
+OBJ-001 (90), OBJ-002 (97)
+
+
+TASK 5: Detecting Data Quality Issues
+
+number of invalid records:
+30
+
+where invalid records appear:
+middle and end of the dataset
+
+example invalid records:
+2026-03-01 18:50:00,OBJ-001,INVALID,7.7,598,0.81,OK,0  
+2026-03-02 01:25:00,OBJ-002,INVALID,7.92,454,0.78,OK,0  
+2026-03-03 05:35:00,OBJ-002,INVALID,7.95,498,0.95,OK,0  
+
+
+TASK 6: Exploring Numerical Ranges
+
+temperature:
+min = INVALID values
+max = 20.50841799679463
+
+velocity:
+min = 7.0
+max = 8.0
+
+potential outliers:
+Some high temperature values (~20.5) compared to typical range
+
+
+TASK 7: Understanding Target Variable
+
+extract values from the column anomaly flag (0 and 1), determine how many records correspond to each value:
+0 : 441  
+1 : 59  
+
+most frequent value:0
+
+determine whether anomalous observations are rare or common in the dataset:
+Anomalies are rare in the dataset
+
+
+PRACTICE TASKS
+
+P1: Detecting Missing Objects Across Observations
+
+Command used:
+cut -d ',' -f2 data/raw/orbital_observations.csv | tail -n +2 | sort | uniq -c | awk '$1==1'
+
+Result:
+No objects appear only once in the dataset
+
+Full records corresponding to those objects:
+None
+
+
+P2: Identifying Dominant Objects
+
+Command used:
+cut -d ',' -f2 data/raw/orbital_observations.csv | tail -n +2 | sort | uniq -c | sort -nr
+
+Most frequent object:
+OBJ-004 (113 observations)
+
+Example records:
+2026-03-01 13:25:00,OBJ-004,14.15,7.7,403,0.6892904162953539,DEGRADED,0  
+2026-03-01 15:50:00,OBJ-004,15.53,7.15,439,0.6708160805828866,DEGRADED,0  
+
+Comparison:
+OBJ-004 appears more frequently than other objects yhe next highest: OBJ-003 and OBJ-005 with 100 observations
+
+
+P3: Cross-Feature Analysis
+
+Command used:
+awk -F',' '$3 > 18 && $6 < 0.6' data/raw/orbital_observations.csv
+
+Result:
+Records found where temperature is high and signal strength is low
+
+Example records:
+2026-03-03 05:30:00,OBJ-004,18.819514997340818,7.3,570,0.5504117959553989,DEGRADED,1  
+
+Number of cases:
+5 but depends on threshold 
+
+
+P4: Consistency Check Between Features
+
+Command used:
+awk -F',' '$7 != "OK" && $8 == 0' data/raw/orbital_observations.csv
+
+Result:
+Records found where sensor_status is not OK but anomaly_flag = 0
+
+Example records:
+2026-03-01 12:10:00,OBJ-001,16.29,7.03,451,0.5061892083657298,DEGRADED,0  
+2026-03-01 12:40:00,OBJ-001,14.5,7.8,497,0.5639619172711572,DEGRADED,0  
+
+
+P5: model_input.csv created:
+Command:
+grep -v "INVALID" data/raw/orbital_observations.csv | cut -d ',' -f3,4,5,6 > data/processed/model_input.csv
+

@@ -1,0 +1,129 @@
+Repository link: https://github.com/ALBALOZANOG/Artificial-Intelligence-and-Data-Engineering-for-Orbital-Systems
+
+--- TASK 1
+script created, output:
+albag@PCALBA:~/IA/Lab-4/ooais-project$ python3 src/preprocessing/prepare_ml_input.py
+=== ML Input Preparation: Loading and Conversion ===
+Input file: data/processed/observations_valid.csv
+Records loaded: 470
+Records accepted: 470
+Records rejected: 0
+
+--- TASK 2
+scrpit modified, output:
+albag@PCALBA:~/IA/Lab-4/ooais-project$ python3 src/preprocessing/prepare_ml_input.py
+=== ML Input Preparation: Loading and Conversion ===
+Input file: data/processed/observations_valid.csv
+Records loaded: 470
+Records accepted: 470
+Records rejected: 0
+
+=== ML Input Preparation: Normalization ===
+Normalization completed successfully.
+All selected numerical features are in range [0,1].
+
+
+--- TASK 3
+script modified, output:
+albag@PCALBA:~/IA/Lab-4/ooais-project$ python3 src/preprocessing/prepare_ml_input.py
+=== ML Input Preparation: Loading and Conversion ===
+Input file: data/processed/observations_valid.csv
+Records loaded: 470
+Records accepted: 470
+Records rejected: 0
+
+=== ML Input Preparation: Normalization ===
+Normalization completed successfully.
+All selected numerical features are in range [0,1].
+
+=== ML Input Preparation: Derived Features ===
+New features added:
+- temperature_velocity_interaction
+- altitude_signal_ratio
+
+Example record (extended):
+{'timestamp': '2026-03-01 12:00:00', 'object_id': 'OBJ-005', 'temperature': 0.2719554891636827, 'velocity': 0.05999999999999961, 'altitude': 0.32, 'signal_strength': 0.9739232071165108, 'sensor_status': 'OK', 'anomaly_flag': '0', 'temperature_velocity_interaction': 0.016317329349820855, 'altitude_signal_ratio': 0.32853426659855983}
+
+
+--- TASK 4
+script modified, output:
+albag@PCALBA:~/IA/Lab-4/ooais-project$ python3 src/preprocessing/prepare_ml_input.py
+=== ML Input Preparation: Loading and Conversion ===
+Input file: data/processed/observations_valid.csv
+Records loaded: 470
+Records accepted: 470
+Records rejected: 0
+
+=== ML Input Preparation: Normalization ===
+Normalization completed successfully.
+All selected numerical features are in range [0,1].
+
+=== ML Input Preparation: Derived Features ===
+New features added:
+- temperature_velocity_interaction
+- altitude_signal_ratio
+
+Example record (extended):
+{'timestamp': '2026-03-01 12:00:00', 'object_id': 'OBJ-005', 'temperature': 0.2719554891636827, 'velocity': 0.05999999999999961, 'altitude': 0.32, 'signal_strength': 0.9739232071165108, 'sensor_status': 'OK', 'anomaly_flag': '0', 'temperature_velocity_interaction': 0.016317329349820855, 'altitude_signal_ratio': 0.32853426659855983}
+
+=== ML Input Preparation: Temporal Features ===
+New feature added:
+- hour_normalized
+
+Example record (extended):
+{'timestamp': '2026-03-01 12:00:00', 'object_id': 'OBJ-005', 'temperature': 0.2719554891636827, 'velocity': 0.05999999999999961, 'altitude': 0.32, 'signal_strength': 0.9739232071165108, 'sensor_status': 'OK', 'anomaly_flag': '0', 'temperature_velocity_interaction': 0.016317329349820855, 'altitude_signal_ratio': 0.32853426659855983, 'hour_normalized': 0.5}
+
+
+
+--- TASK 5
+script modified, output:
+albag@PCALBA:~/IA/Lab-4/ooais-project$ python3 src/preprocessing/prepare_ml_input.py
+=== ML Input Preparation: Loading and Conversion ===
+Input file: data/processed/observations_valid.csv
+Records loaded: 470
+Records accepted: 470
+Records rejected: 0
+
+=== ML Input Preparation: Normalization ===
+Normalization completed successfully.
+All selected numerical features are in range [0,1].
+
+=== ML Input Preparation: Derived Features ===
+New features added:
+- temperature_velocity_interaction
+- altitude_signal_ratio
+
+Example record (extended):
+{'timestamp': '2026-03-01 12:00:00', 'object_id': 'OBJ-005', 'temperature': 0.2719554891636827, 'velocity': 0.05999999999999961, 'altitude': 0.32, 'signal_strength': 0.9739232071165108, 'sensor_status': 'OK', 'anomaly_flag': '0', 'temperature_velocity_interaction': 0.016317329349820855, 'altitude_signal_ratio': 0.32853426659855983}
+
+=== ML Input Preparation: Temporal Features ===
+New feature added:
+- hour_normalized
+
+Example record (extended):
+{'timestamp': '2026-03-01 12:00:00', 'object_id': 'OBJ-005', 'temperature': 0.2719554891636827, 'velocity': 0.05999999999999961, 'altitude': 0.32, 'signal_strength': 0.9739232071165108, 'sensor_status': 'OK', 'anomaly_flag': '0', 'temperature_velocity_interaction': 0.016317329349820855, 'altitude_signal_ratio': 0.32853426659855983, 'hour_normalized': 0.5}
+
+=== ML Input Preparation: Feature Selection ===
+Selected features:
+- temperature
+- velocity
+- altitude
+- signal_strength
+- temperature_velocity_interaction
+- altitude_signal_ratio
+- hour_normalized
+
+Example record (final):
+{'temperature': 0.2719554891636827, 'velocity': 0.05999999999999961, 'altitude': 0.32, 'signal_strength': 0.9739232071165108, 'temperature_velocity_interaction': 0.016317329349820855, 'altitude_signal_ratio': 0.32853426659855983, 'hour_normalized': 0.5}
+
+
+--- TASK 6
+script modified, output:
+=== ML Input Preparation: Saving Outputs ===
+Saved file: data/processed/model_features.csv
+Saved file: data/processed/model_labels.csv
+Number of records: 470
+Number of features: 7
+
+Example label record:
+{'anomaly_flag': '0'}
