@@ -1,0 +1,62 @@
+Repository link: https://github.com/ALBALOZANOG/Artificial-Intelligence-and-Data-Engineering-for-Orbital-Systems
+
+
+OOAIS Model Playground Summary
+=============================
+
+Dataset information
+------------------
+Features: data/processed/model_features.csv
+Labels: data/processed/model_labels.csv
+
+Dataset statistics
+------------------
+Number of samples: 470
+Number of features: 7
+Training samples: 376
+Testing samples: 94
+
+Model comparison results
+------------------------
+- Decision Tree (baseline): 0.9894
+- Random Forest: 0.9894
+- Logistic Regression: 0.9574
+
+Best-performing model
+---------------------
+Decision Tree (baseline) achieved the highest accuracy: 0.9894
+
+Selected evaluation metrics (Anomaly Class)
+------------------------------------------
+Precision: 1.00
+Recall: 0.93
+F1-score: 0.96
+
+Results of controlled experiments
+---------------------------------
+- Decision Tree (max_depth=2): 0.9894
+- Decision Tree (max_depth=3): 0.9894
+- Decision Tree (max_depth=5): 0.9894
+- Random Forest (n_estimators=5): 0.9894
+- Random Forest (n_estimators=10): 0.9894
+- Random Forest (n_estimators=50): 0.9894
+
+Interpretation and Reflection (Task 15)
+---------------------------------------
+1. Highest Accuracy: Decision Tree (baseline).
+2. Differences: Small (all models > 95%), but tree-based models were more consistent.
+3. Complexity: Not always; a simple Decision Tree matched the Random Forest.
+4. Promising Model: Random Forest, due to its ensemble stability.
+5. Reliable Anomaly Detection: Tree-based models (Precision 1.00, Recall 0.93).
+6. Accuracy Limits: It hides the poor recall of Logistic Regression (0.71) for rare anomalies.
+
+Optional Challenge: Disagreements (Task 21)
+------------------------------------------
+Total disagreements: 3
+- Models disagree on 'borderline' cases that lack clear linear separation.
+- Tree-based models are correct more often in these cases.
+- These cases are ambiguous as they likely reside near decision boundaries.
+
+Final Conclusion
+----------------
+Tree-based models are the best candidates for this task due to superior anomaly detection recall.
