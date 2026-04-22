@@ -254,16 +254,23 @@ def create_metric_plots(ranked_models):
     titles = ["Accuracy", "Precision (Anomaly)", "Recall (Anomaly)", "F1-score (Anomaly)"]
     
     for ax, data, title in zip(axes.flat, metrics, titles):
-        ax.bar(names, data, color='skyblue')
-        ax.set_title(title)
-        ax.set_ylim(0, 1.1)
-        ax.tick_params(axis="x", rotation=15)
+        bars = ax.bar(names, data, color='skyblue', edgecolor='navy')
+        ax.set_title(title, fontweight='bold')
+        
+        min_val = min(data)
+        ax.set_ylim(max(0, min_val - 0.05), 1.02) 
+        
         ax.set_ylabel("Score")
+        ax.tick_params(axis="x", rotation=15)
+        
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(bar.get_x() + bar.get_width()/2., height + 0.002,
+                    f'{height:.3f}', ha='center', va='bottom', fontsize=9)
 
     plt.tight_layout()
     plt.savefig("reports/model_comparison_panel.png")
     print("Saved file: reports/model_comparison_panel.png")
-
 # --- MAIN EXECUTION ---
 if __name__ == "__main__":
     validate_input_files()
