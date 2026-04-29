@@ -1,0 +1,64 @@
+Repository link: https://github.com/ALBALOZANOG/Artificial-Intelligence-and-Data-Engineering-for-Orbital-Systems
+
+--- Experiment 1
+• What class is predicted?
+	Residential
+• Does the prediction make sense?
+	Yes because the highway's straight lines and 	asphalt seems like the man-made textures of 	residential areas.
+
+--- Experiment 2
+	The model predicts residencial. The pixelated 	mess looks more like a crowded city than a 	uniform forest or a river
+
+--- TASK 11
+• Which model achieves the best accuracy?
+	Random Forest
+• Do different models classify the same image in the same way?
+The forest image they all clasifficate well but more complex images like the noise one produce different classifications (SVM:river, other models: Residental)
+• Times:
+=== Training and Evaluation ===
+Model: Random Forest
+Accuracy: 0.9444
+Training time: 0.9853 s
+
+Model: KNN
+Accuracy: 0.6111
+Training time: 0.0027 s
+
+Model: Logistic Regression
+Accuracy: 0.7500
+Training time: 85.0124 s
+
+Model: SVM
+Accuracy: 0.8889
+Training time: 0.2574 s
+
+--- QUESTIONS
+How is an image converted into numbers?
+The image is resized to 64x64 pixels, and its RGB color values are normalized (divided by 255) and flattened into a single numerical vector of 12,288 elements (64 * 64 * 3).
+
+What does the model actually “see”?
+The model does not "see" a visual picture, it perceives a long sequence of numerical values representing the intensity and color of every pixel in a specific order.
+
+Why can the model classify random or unknown images as one of the known classes?
+Because the model’s output layer is mathematically restricted to choose only from the classes it was trained on (Forest, River, Residential). It assigns the input to the category with the highest statistical probability, even if the input is irrelevant.
+
+Why can this behavior be dangerous in real AI systems?
+It migth leads to overconfidence in incorrect predictions. In real-world space observation, this could result in false alarms, incorrect environmental reporting, or critical failures in autonomous decision-making systems.
+
+What would need to be improved before using such a system operationally?
+The system would require a much larger and more diverse dataset, the inclusion of a "None" or "Unknown" class, and the use of more advanced architectures like Convolutional Neural Networks (CNNs) that understand spatial patterns better than simple classifiers.
+
+Which model achieved the highest accuracy?
+Random Forest achieved the highest accuracy (approximately 0.9444).
+
+Which model was fastest to train?
+KNN was the fastest to train (approximately 0.0027 s).
+
+Did the fastest model also achieve the best accuracy?
+No, KNN was the fastest but had significantly lower accuracy (0.6111) compared to the Random Forest.
+
+Did all models classify the same image in the same way?
+No, since each algorithm uses a different mathematical approach to define decision boundaries, they produce different predictions for the same image, especially if the image is ambiguous like the noise one.
+
+What does the accuracy vs training time plot show?
+The accuracy vs training time plot visualizes the performance trade-off between how long a model takes to learn and how accurately it can predict unseen data.
