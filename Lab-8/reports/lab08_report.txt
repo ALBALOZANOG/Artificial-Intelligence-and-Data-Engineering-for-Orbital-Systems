@@ -1,0 +1,122 @@
+Repository link: https://github.com/ALBALOZANOG/Artificial-Intelligence-and-Data-Engineering-for-Orbital-Systems
+
+--- Experiment 1
+• What class is predicted?
+	Residential
+• Is the confidence high or low?
+	High, 0.9973
+• Does the prediction make sense?
+	Yes because the highway's straight lines and 	asphalt seems like the man-made textures of 	residential areas.
+
+--- Experiment 2
+• What class is predicted?
+	Residential
+• Is the confidence meaningful?
+	Yes, 0.999
+• Why does the model not say “unknown”?
+	Because the model only knows the clases it 	was trained on
+
+--- Confusion Matrix
+• Which classes are confused most often?
+	River with residential
+• Is forest easier to classify than residential?
+	Both are equially easy. The 20 images of each class are well clasified 
+• Which errors would be most dangerous in a real system?
+	Misclassifying a River as Residential is the most dangerous error. It could lead to building infrastructure in flood-prone areas or sending ground vehicles into water during automated navigation.
+
+
+--- Engineering Analysis
+• Which model achieved higher accuracy?
+The Simple CNN (85.00% vs. 78.33%).
+
+• Which model trained faster?
+Random Forest (Classical ML).
+
+• Which model produced fewer class confusions?
+The Simple CNN.
+
+• Which model handled difficult images better?
+The Simple CNN, as its ability to extract automated spatial hierarchies allows it to distinguish complex patterns that manual feature extraction might miss.
+
+• Which model appears more robust?
+The Simple CNN, due to its superior generalization on the testing samples and lower error rate.
+
+• Is the additional computational cost of CNN justified?
+Yes. A ~7% improvement in accuracy and better generalization justify the higher training cost, especially for computer vision tasks where spatial context is critical.
+
+--- Final reflection 
+• What does CNN learn that classical ML may miss?
+CNNs learn spatial hierarchies and local textures automatically through convolution filters. In this dataset, a CNN can learn the specific "organic" randomness of river curves or the geometric repetition of roofs in residential areas. Classical ML relies on global features (like color histograms or basic edges) and might miss the specific structural arrangement that defines a "house" vs. "forest" if the colors are similar.
+
+• When might classical ML still be preferable?
+It is preferable when computational resources are  limited, when the dataset is very small (where CNNs might overfit), or when interpretability is required, as manual features allow engineers to see exactly which attribute drove the prediction.
+
+• When would CNN be the better engineering choice?
+When the priority is maximum accuracy and the data is visually complex. If you have a GPU available and enough labeled data, a CNN is the better choice because it eliminates the need for "feature engineering," which is time-consuming and often fails to capture all nuances of the image.
+
+• Would you deploy CNN in a real orbital observation system? Why?
+Yes. In orbital systems, lighting conditions and angles vary significantly. A CNN's spatial invariance and higher generalization (85% accuracy in your test) make it more reliable for mission-critical tasks where misclassifying a "river" or "forest" could lead to incorrect environmental or tactical assessments. The higher accuracy justifies the initial training cost.
+
+
+
+• Did augmentation improve accuracy?
+Yes. The accuracy increased showing a significant improvement in generalization.
+
+• Did training become more stable?
+Yes. While the loss had a slight plateau between epochs 5 and 7, it achieved a much lower final loss (0.2767 vs. 0.3503), suggesting the model learned more robust features rather than just memorizing the training set.
+
+• Which classes improved the most?
+River and Residential. River accuracy jumped from 45% (9/20) to 60% (12/20) and stopped being confused with Forest. Residential achieved a perfect score of 100% (20/20) compared to the previous 95% (19/20).
+
+• Why can augmentation be useful for satellite imagery?
+Satellites capture terrain from varying orbital paths, angles, and lighting conditions. Augmentations like RandomRotation and Flips simulate these different viewpoints, making the model invariant to the orientation of geographical features (like a river flowing in any direction).
+
+
+---  MORE EPOCHS
+Did accuracy improve?
+• Yes, significantly. Accuracy jumped from 0.8667 (at 10 epochs) to 0.9833. 
+
+• Did loss continue to decrease?
+Yes. The loss decreased  down to 0.2287 by epoch 20. Although there were some fluctuations  the overall trend remained downward, indicating the model was still extracting useful patterns from the augmented data.
+
+• Is more training always better?
+No. While it worked here, more training eventually leads to overfitting, where the model starts memorizing the noise in the training data rather than general patterns. 
+
+--- Extra Convolutional Layer
+• Did the deeper model improve performance?
+No. Accuracy dropped to 83.33%. For a dataset this small, the extra complexity likely made the model harder to optimize.
+
+• Did training become slower?
+Yes. Adding more convolutional filters and layers increases the total parameter count and mathematical operations, resulting in higher latency per epoch.
+
+• What is the trade-off between model size and performance?
+The trade-off is Complexity vs. Efficiency. While deeper models can capture more intricate details, they require more data and more power. For small datasets, a simpler model is often more robust, faster, and more accurate.
+
+
+--- REFLECTION
+ENGINEERING QUESTIONS AND ANALYSIS
+==================================
+
+- What is the difference between a flattened image vector and an image tensor?
+An image tensor maintains the spatial structure of the data in a multi-dimensional grid, preserving the relationships between neighboring pixels. A flattened vector collapses this data into a single-dimensional list, destroying all spatial and geometric context.
+
+- What does a PyTorch Dataset do?
+It acts as a data wrapper that manages individual samples. Its primary role is to load an image from disk and apply the necessary transformations (like resizing or augmentation) when a specific index is requested.
+
+- What does a DataLoader do?
+It acts as a manager for the Dataset. It handles grouping individual samples into batches, shuffling the data to ensure the model doesn't learn the order of the files, and managing parallel processing to load data efficiently.
+
+- Why are CNNs useful for image data?
+CNNs are designed for spatial invariance. By using convolutional filters, they can detect patterns like edges, textures, and shapes regardless of where they are located in the frame, making them far more robust than traditional networks for visual tasks.
+
+- What does the model output before the final class is selected?
+The model outputs "logits," which are raw numerical scores for each possible class. These scores indicate the model's relative confidence before they are typically converted into probabilities via a Softmax function.
+
+- Why can the model classify random or unknown images as one of the known classes?
+The model operates on a "closed-world" assumption. Since it only has output neurons for the specific classes it was trained on (e.g., forest, river, residential), it is forced to assign any input to the neuron with the highest activation, even if the image is irrelevant noise.
+
+- Why can this behavior be dangerous in real orbital AI systems?
+In an orbital environment, the sensor might capture unexpected objects like rare weather phenomena, smoke, or sensor artifacts. If the AI incorrectly classifies these as a "target" with high confidence, it could trigger false mission alerts or waste critical satellite resources and bandwidth.
+
+- What would need to be improved before using such a model operationally?
+The system would require an "Unknown" or "Background" class, Out-of-Distribution (OOD) detection, and a strict confidence threshold. Additionally, it would need to be trained on a much wider variety of atmospheric and lighting conditions.

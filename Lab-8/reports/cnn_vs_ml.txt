@@ -1,0 +1,18 @@
+CNN VS CLASSICAL ML
+===================
+CLASSICAL ML:
+Model: Random Forest
+Training time: Fast (CPU-based)
+Accuracy: 0.7833
+CNN:
+Model: Simple CNN
+Training time: Slow (Epoch-based)
+Accuracy: 0.8500
+BETTER ACCURACY:
+Simple CNN
+FASTER TRAINING:
+Random Forest
+FEWER CLASS CONFUSIONS:
+Simple CNN
+GENERALIZATION:
+CNN captures spatial hierarchical patterns more effectively
